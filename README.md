@@ -1,7 +1,7 @@
 # Nova
-Simple Discord nukers using Python 3.9.7!
+Simple Discord nuker using Python 3.9.7!
 
-Best Discord nuker for newbies and beginners.
+Best simple Discord nuker for newbies and beginners.
 
 # Functions
 
