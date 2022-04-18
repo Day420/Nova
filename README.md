@@ -2,7 +2,7 @@
 
 Most advanced Discord nuker.
 
-#Reqs
+# Reqs
 
 - Python 3.9.7
 - colorama (pip install colorama)
