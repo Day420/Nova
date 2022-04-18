@@ -12,7 +12,7 @@ Most advanced Discord nuker.
 
 # Changelog (1.2)
 
-- Deletes all channels in guild.
+- Deletes all channels in guild
 - Deletes all roles
 - Renames guild
 - Changed console look
