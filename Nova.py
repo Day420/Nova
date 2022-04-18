@@ -69,7 +69,7 @@ def menu():
             f.write(prefix)
             f.close()
     if not os.path.isfile('.message'):
-        message = input(f" {m}|{r} Spam message : ")
+        spammessage = input(f" {m}|{r} Spam message : ")
         f = open(".message", "w")
         f.write(spammessage)
         f.close()
